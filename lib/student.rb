@@ -25,6 +25,36 @@ class Student
     DB[:conn].execute("DROP TABLE IF EXISTS students")
   end
 
+  def self.find_by_name(name)
+    sql = <<-SQL
+    SELECT * FROM students
+    WHERE name = ?
+    SQL
+    row_student = DB[:conn].execute(sql, name)
+    student = Student.new
+    student.id = row_student[0]
+    student.name = row_student[1]
+    student.grade = row_student[2]
+    student
+  end
+
+  def self.new_from_db(row)
+
+  end
+
+  def self.create(name, grade)
+    sql = <<-SQL
+    INSERT INTO students (name, grade)
+    VALUES (?,?)
+    SQL
+    row_student = DB[:conn].execute(sql, name, grade)
+    student = Student.new
+    student.id = row_student[0]
+    student.name = row_student[1]
+    student.grade = row_student[2]
+    student
+  end
+  
   def save
     if self.id
       self.update
@@ -45,33 +75,4 @@ class Student
     DB[:conn].execute(sql, self.name, self.grade, self.id)
   end
 
-  def self.find_by_name(name)
-    sql = <<-SQL
-    SELECT * FROM students
-    WHERE name = ?
-    SQL
-    row_student = DB[:conn].execute(sql, name)
-    student = Student.new
-    student.id = row_student[0]
-    student.name = row_student[1]
-    student.grade = row_student[2]
-    student
-  end
-
-  def self.new_from_db
-    
-  end
-
-  def self.create(name, grade)
-    sql = <<-SQL
-    INSERT INTO students (name, grade)
-    VALUES (?,?)
-    SQL
-    row_student = DB[:conn].execute(sql, name, grade)
-    student = Student.new
-    student.id = row_student[0]
-    student.name = row_student[1]
-    student.grade = row_student[2]
-    student
-  end
 end
