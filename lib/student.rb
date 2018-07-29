@@ -57,4 +57,8 @@ class Student
     student.grade = row_student[2]
     student
   end
+
+  def self.create(name, grade)
+    
+  end
 end
