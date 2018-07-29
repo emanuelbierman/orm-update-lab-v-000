@@ -58,6 +58,10 @@ class Student
     student
   end
 
+  def self.new_from_db
+    
+  end
+
   def self.create(name, grade)
     sql = <<-SQL
     INSERT INTO students (name, grade)
