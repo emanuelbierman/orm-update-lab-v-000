@@ -63,6 +63,11 @@ class Student
     INSERT INTO students (name, grade)
     VALUES (?,?)
     SQL
-    DB[:conn].execute(sql, name, grade)
+    row_student = DB[:conn].execute(sql, name, grade)
+    student = Student.new
+    student.id = row_student[0]
+    student.name = row_student[1]
+    student.grade = row_student[2]
+    student
   end
 end
