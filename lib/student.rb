@@ -43,7 +43,7 @@ class Student
   end
 
   def self.new_from_db(row)
-    Student.new(row[1], row[2]).save
+    Student.new(roq[0], row[1], row[2]).save
   end
 
   def save
