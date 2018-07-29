@@ -48,7 +48,8 @@ class Student
   def find_by_name(name)
     sql = <<-SQL
     SQL
-    student = DB[:conn].execute(sql, name)
-    student 
+    row_student = DB[:conn].execute(sql, name)
+    student = Student.new
+    student.id = row_student[0]
   end
 end
