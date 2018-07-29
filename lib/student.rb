@@ -31,11 +31,7 @@ class Student
     WHERE name = ?
     SQL
     row_student = DB[:conn].execute(sql, name)
-    student = Student.new
-    student.id = row_student[0]
-    student.name = row_student[1]
-    student.grade = row_student[2]
-    student
+    self.new_from_db(row_student)
   end
 
   def self.create(name, grade)
