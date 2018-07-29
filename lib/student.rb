@@ -47,14 +47,7 @@ class Student
   end
 
   def self.create(name, grade)
-    sql = <<-SQL
-    INSERT INTO students (name, grade)
-    VALUES (?,?)
-    SQL
-    row_student = DB[:conn].execute(sql, name, grade)
-    student = Student.new(name, grade)
-    student.id = row_student[0]
-    student
+    Student.new(name, grade).save
   end
 
   def save
