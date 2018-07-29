@@ -30,7 +30,6 @@ class Student
     SELECT * FROM students
     WHERE name = ?
     SQL
-    binding.pry
     row_student = DB[:conn].execute(sql, name)
     self.new_from_db(row_student)
   end
@@ -42,6 +41,7 @@ class Student
   end
 
   def self.new_from_db(row)
+    binding.pry
     student = Student.new(row[0], row[1], row[2])
     student.save
     student
