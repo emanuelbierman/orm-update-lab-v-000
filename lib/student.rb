@@ -39,9 +39,11 @@ class Student
   end
 
   def self.new_from_db(row)
-    sql = <<-SQL
-    
-    SQL
+    student = Student.new
+    student.id = row_student[0]
+    student.name = row_student[1]
+    student.grade = row_student[2]
+    student
   end
 
   def self.create(name, grade)
@@ -50,13 +52,13 @@ class Student
     VALUES (?,?)
     SQL
     row_student = DB[:conn].execute(sql, name, grade)
-    student = Student.new
+    student = Student.new(name, grade)
     student.id = row_student[0]
     student.name = row_student[1]
     student.grade = row_student[2]
     student
   end
-  
+
   def save
     if self.id
       self.update
