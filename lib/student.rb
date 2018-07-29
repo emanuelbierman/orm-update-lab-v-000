@@ -48,5 +48,6 @@ class Student
   def find_by_name(name)
     sql = <<-SQL
     SQL
+    DB[:conn].execute()
   end
 end
